@@ -1,0 +1,16 @@
+#!/usr/bin/ruby
+
+gem "google_drive"
+
+require 'bundler'
+Bundler.require
+
+# authenticate a session with your Service Account
+session = GoogleDrive::Session.from_service_account_key("client_secret_json")
+
+# Get the Spreadsheet by its title
+spreadsheet = session.spreadsheet_by_title("EmailsVille87")
+# Get the first worksheet
+worksheet = spreadsheet.worksheet.first
+# Print out the first 6 columns of each row 
+worksheet.rows.each { |row| puts row.first(6).join(" | ") }
